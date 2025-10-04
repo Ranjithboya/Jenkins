@@ -17,6 +17,16 @@ pipeline {
                 bat 'pytest'
             }
         }
+        stage('Package App'){
+            steps{
+                bat 'powershell Compress-Archive -Path * -DestinationPath build.zip'
+            }
+        }
+        stage('Archive Zip'){
+            steps{
+                archiveArtifacts artifacts: 'build.zip', fingerprint: true
+            }
+        }
     }
 }
  
