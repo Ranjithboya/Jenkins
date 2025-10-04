@@ -2,19 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                echo 'Cloning repository...'
+                checkout scm
             }
         }
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Building project...'
+                sh 'pip install pytest'
             }
         }
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                echo 'Running tests...'
+                sh 'pytest'
             }
         }
     }
